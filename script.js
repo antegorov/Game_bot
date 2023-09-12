@@ -4,8 +4,8 @@ const guessNumber = function (numBot) {
 	let count = 10
 	return function checked() {
 		let num = prompt('Угадай число от 1 до 100')
-		console.log(numBot)
-		console.log(count)
+		console.log('Загаданное число: ' + numBot)
+		console.log('Попытка № ' + count)
 		count -= 1
 		if (count > 0) {
 			if (num === null) {
@@ -14,8 +14,15 @@ const guessNumber = function (numBot) {
 			}
 			if (!isNaN(parseFloat(num)) && isFinite(num)) {
 				if (num == numBot) {
-					alert('Поздравляю, Вы угадали!!!')
-					return
+					let repeat = confirm(
+						'Поздравляю, Вы угадали!!! Хотели бы сыграть еще?'
+					)
+					if (repeat) {
+						let repeatGuessNumber = guessNumber(
+							Math.floor(Math.random() * (100 - 1) + 1)
+						)
+						repeatGuessNumber()
+					} else return
 				}
 				if (num > numBot) {
 					alert('Загаданное число меньше, осталось попыток ' + count)
